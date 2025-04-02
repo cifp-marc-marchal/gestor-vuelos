@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public class Reserva {
     private int idReserva;
-    private int idVol;
+    private String idVol;
     private int idUsuari;
     private LocalDate dataReserva;
 
-    public Reserva(int idReserva, int idVol, int idUsuari, LocalDate dataReserva) {
+    public Reserva(int idReserva, String idVol, int idUsuari, LocalDate dataReserva) {
         this.idReserva = idReserva;
         this.idVol = idVol;
         this.idUsuari = idUsuari;
@@ -19,7 +19,7 @@ public class Reserva {
         return idReserva;
     }
 
-    public int getIdVol() {
+    public String getIdVol() {
         return idVol;
     }
 
