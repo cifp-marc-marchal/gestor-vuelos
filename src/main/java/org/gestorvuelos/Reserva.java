@@ -7,12 +7,14 @@ public class Reserva {
     private String idVol;
     private int idUsuari;
     private LocalDate dataReserva;
+    private int numPasajeros;
 
-    public Reserva(int idReserva, String idVol, int idUsuari, LocalDate dataReserva) {
+    public Reserva(int idReserva, String idVol, int idUsuari, LocalDate dataReserva, int numPasajeros) {
         this.idReserva = idReserva;
         this.idVol = idVol;
         this.idUsuari = idUsuari;
         this.dataReserva = dataReserva;
+        this.numPasajeros = numPasajeros;
     }
 
     public int getIdReserva() {
@@ -31,8 +33,14 @@ public class Reserva {
         return dataReserva;
     }
 
+    public int getNumPasajeros() {
+        return numPasajeros;
+    }
+
+
     @Override
     public String toString() {
-        return "Reserva [idReserva=" + idReserva + ", idVol=" + idVol + ", idUsuari=" + idUsuari + ", dataReserva=" + dataReserva + "]";
+        return "Reserva [idReserva=" + idReserva + ", idVol=" + idVol + ", idUsuari=" + idUsuari +
+                ", dataReserva=" + dataReserva + ", numPasajeros=" + numPasajeros + "]";
     }
 }
