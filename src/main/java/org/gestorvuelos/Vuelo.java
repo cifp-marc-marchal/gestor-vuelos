@@ -1,15 +1,17 @@
 package org.gestorvuelos;
 
+import java.time.LocalDate;
+
 public class Vuelo {
     private String flightIdentifier;
     private String origen;
     private String destino;
-    private String fecha;
+    private LocalDate fecha;
     private String hora;
     private Integer asientos;
     private Integer asientos_disponibles;
 
-    public Vuelo(String flightIdentifier, String origen, String destino, String fecha, String hora, Integer asientos, Integer asientos_disponibles) {
+    public Vuelo(String flightIdentifier, String origen, String destino, LocalDate fecha, String hora, Integer asientos, Integer asientos_disponibles) {
         this.flightIdentifier = flightIdentifier;
         this.origen = origen;
         this.destino = destino;
@@ -43,11 +45,11 @@ public class Vuelo {
         this.destino = destino;
     }
 
-    public String getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
