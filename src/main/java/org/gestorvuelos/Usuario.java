@@ -25,7 +25,8 @@ public class Usuario {
         this.email = email;
     }
 
-    public Usuario(String s, String pepito, String pRez, String mail, String number, String number1) {
+    public Usuario(String DNI, String name, String apellido1, String email, String contasena, String numero) {
+        this(DNI, name, apellido1, null, email, contasena, numero);
     }
 
     public String getIdUsuario() {
