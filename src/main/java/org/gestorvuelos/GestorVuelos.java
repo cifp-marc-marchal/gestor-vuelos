@@ -30,14 +30,23 @@ public class GestorVuelos {
         vuelos = temp;
     }
 
-    public static Vuelo[] consultarVolsPerDia(Vuelo [] vuelos, LocalDate fecha) {
+    public Vuelo getVuelo(String flightIdentifier) {
+        for (int i = 0; i < vuelos.length; i++) {
+            if (vuelos[i].getFlightIdentifier().equals(flightIdentifier)) {
+                return vuelos[i];
+            }
+        }
+        return null;
+    }
+
+    public Vuelo[] consultarVolsPerDia(LocalDate fecha) {
 
         Vuelo[] temp = new Vuelo[vuelos.length];
         int contador = 0;
 
-        for (int i = 0; i < vuelos.length; i++) {
-            if (vuelos[i].getFecha().equals(fecha)) {
-                temp[contador] = vuelos[i];
+        for (int i = 0; i < this.vuelos.length; i++) {
+            if (this.vuelos[i].getFecha().equals(fecha)) {
+                temp[contador] = this.vuelos[i];
                 contador++;
             }
         }
@@ -50,16 +59,15 @@ public class GestorVuelos {
         return resultadoFinal;
     }
 
-    public static Vuelo[] consultarVolsPerSetmana(Vuelo[] vuelos, LocalDate fechaInicioSemana) {
-        Vuelo[] temp = new Vuelo[vuelos.length];
-        int contador = 0;
+    public Vuelo[] consultarVolsPerSetmana(LocalDate fechaInicioSemana) {
+        Vuelo[] resultadoFinal = new Vuelo[0];
 
         int diaInicio = fechaInicioSemana.getDayOfMonth();
         int mesInicio = fechaInicioSemana.getMonthValue();
         int anioInicio = fechaInicioSemana.getYear();
 
-        for (int i = 0; i < vuelos.length; i++) {
-            LocalDate fechaVuelo = vuelos[i].getFecha();
+        for (int i = 0; i < this.vuelos.length; i++) {
+            LocalDate fechaVuelo = this.vuelos[i].getFecha();
 
             int diaVuelo = fechaVuelo.getDayOfMonth();
             int mesVuelo = fechaVuelo.getMonthValue();
@@ -67,26 +75,11 @@ public class GestorVuelos {
 
             if (anioVuelo == anioInicio && mesVuelo == mesInicio) {
                 if (diaVuelo >= diaInicio && diaVuelo <= diaInicio + 6) {
-                    temp[contador] = vuelos[i];
-                    contador++;
+                    resultadoFinal = Utils.addElementToArray(resultadoFinal, this.vuelos[i]);
                 }
             }
         }
 
-        Vuelo[] resultadoFinal = new Vuelo[contador];
-        for (int i = 0; i < contador; i++) {
-            resultadoFinal[i] = temp[i];
-        }
-
         return resultadoFinal;
     }
-
-
-
-
 }
-
-
-
-
-

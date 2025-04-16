@@ -5,11 +5,11 @@ import java.time.LocalDate;
 public class Reserva {
     private int idReserva;
     private String idVol;
-    private int idUsuari;
+    private String idUsuari;
     private LocalDate dataReserva;
     private int numPasajeros;
 
-    public Reserva(int idReserva, String idVol, int idUsuari, LocalDate dataReserva, int numPasajeros) {
+    public Reserva(int idReserva, String idVol, String idUsuari, LocalDate dataReserva, int numPasajeros) {
         this.idReserva = idReserva;
         this.idVol = idVol;
         this.idUsuari = idUsuari;
@@ -25,7 +25,7 @@ public class Reserva {
         return idVol;
     }
 
-    public int getIdUsuari() {
+    public String getIdUsuari() {
         return idUsuari;
     }
 

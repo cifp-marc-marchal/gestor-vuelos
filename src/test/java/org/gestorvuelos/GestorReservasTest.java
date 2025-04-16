@@ -11,6 +11,7 @@ class GestorReservasTest {
         void validarDisponibilitat() {
             GestorReservas gestorReservas = new GestorReservas();
             Vuelo vuelo = new Vuelo("ID123", "Origin", "Destination", LocalDate.of(2023, 10, 1), "10:00", 100, 50);
+            Usuario usuario = new Usuario("Pepito", "Pérez", "pepito@gmail.com");
 
             // Caso válido
             assertTrue(gestorReservas.validarDisponibilitat(vuelo, 50));
@@ -23,15 +24,14 @@ class GestorReservasTest {
         void ferReserva() {
             GestorReservas gestorReservas = new GestorReservas();
             Vuelo vuelo = new Vuelo("ID123", "Origin", "Destination", LocalDate.of(2023, 10, 1), "10:00", 100, 50);
+            Usuario usuario = new Usuario("Pepito", "Pérez", "pepito@gmail.com");
 
             // Reserva válida
-            boolean resultadoValido = gestorReservas.ferReserva(vuelo, 25);
-            assertTrue(resultadoValido);
+            assertTrue(gestorReservas.ferReserva(vuelo, usuario, 25));
             assertEquals(25, vuelo.getAsientos_disponibles());
 
             // Reserva inválida (no hay suficientes asientos)
-            boolean resultadoInvalido = gestorReservas.ferReserva(vuelo, 30);
-            assertFalse(resultadoInvalido);
+            assertFalse(gestorReservas.ferReserva(vuelo, usuario, 30));
             assertEquals(25, vuelo.getAsientos_disponibles()); // sin cambios
         }
 
@@ -40,10 +40,11 @@ class GestorReservasTest {
             GestorReservas gestorReservas = new GestorReservas();
             GestorVuelos gestorVuelos = new GestorVuelos();
             Vuelo vuelo = new Vuelo("V100", "Madrid", "Sevilla", LocalDate.of(2025, 5, 10), "08:00", 100, 100);
+            Usuario usuario = new Usuario("Pepito", "Pérez", "pepito@gmail.com");
             gestorVuelos.addVuelo(vuelo);
 
             // Reservamos 3 asientos
-            assertTrue(gestorReservas.ferReserva(vuelo, 3));
+            assertTrue(gestorReservas.ferReserva(vuelo, usuario, 3));
             assertEquals(97, vuelo.getAsientos_disponibles());
 
             // Cancelamos la reserva (ID 1)
@@ -57,6 +58,7 @@ class GestorReservasTest {
             GestorReservas gestorReservas = new GestorReservas();
             GestorVuelos gestorVuelos = new GestorVuelos();
             Vuelo vuelo = new Vuelo("V100", "Madrid", "Sevilla", LocalDate.of(2025, 5, 10), "08:00", 100, 100);
+            Usuario usuario = new Usuario("Pepito", "Pérez", "pepito@gmail.com");
             gestorVuelos.addVuelo(vuelo);
 
             // Intentamos cancelar reserva inexistente
@@ -69,10 +71,11 @@ class GestorReservasTest {
             GestorReservas gestorReservas = new GestorReservas();
             GestorVuelos gestorVuelos = new GestorVuelos();
             Vuelo vuelo = new Vuelo("V101", "Madrid", "Valencia", LocalDate.of(2025, 5, 12), "09:00", 150, 150);
+            Usuario usuario = new Usuario("Pepito", "Pérez", "pepito@gmail.com");
             gestorVuelos.addVuelo(vuelo);
 
             // Creamos reserva
-            assertTrue(gestorReservas.ferReserva(vuelo, 2));
+            assertTrue(gestorReservas.ferReserva(vuelo, usuario, 2));
             assertEquals(148, vuelo.getAsientos_disponibles());
 
             // Simulamos que el vuelo ya no existe

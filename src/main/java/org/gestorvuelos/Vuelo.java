@@ -77,4 +77,17 @@ public class Vuelo {
     public void setAsientos_disponibles(Integer asientos_disponibles) {
         this.asientos_disponibles = asientos_disponibles;
     }
+
+    @Override
+    public String toString() {
+        return "Vuelo{" +
+                "flightIdentifier='" + flightIdentifier + '\'' +
+                ", origen='" + origen + '\'' +
+                ", destino='" + destino + '\'' +
+                ", fecha=" + fecha +
+                ", hora='" + hora + '\'' +
+                ", asientos=" + asientos +
+                ", asientos_disponibles=" + asientos_disponibles +
+                '}';
+    }
 }

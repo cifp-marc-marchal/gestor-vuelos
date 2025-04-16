@@ -47,29 +47,30 @@ class GestorVuelosTest {
     @org.junit.jupiter.api.Test
     void consultarVolsPerSetmana() {
         //arrange
-        Vuelo[] vuelos = new Vuelo[5];
-        vuelos[0] = new Vuelo("A123", "Madrid", "París", LocalDate.of(2025, 4, 12), "10:00", 180, 50);
-        vuelos[1] = new Vuelo("B456", "Madrid", "Londres", LocalDate.of(2025, 4, 14), "12:00", 200, 80);
-        vuelos[2] = new Vuelo("C789", "Barcelona", "Roma", LocalDate.of(2025, 4, 16), "14:00", 150, 75);
-        vuelos[3] = new Vuelo("D321", "Madrid", "Berlín", LocalDate.of(2025, 4, 21), "16:00", 160, 60);
-        vuelos[4] = new Vuelo("E654", "Valencia", "Lisboa", LocalDate.of(2025, 4, 18), "09:00", 140, 90);
-        //add
-        LocalDate fechaInicioSemana = LocalDate.of(2023, 10, 2);
-        Vuelo[] vuelosSemana = GestorVuelos.consultarVolsPerSetmana(vuelos, fechaInicioSemana);
+        GestorVuelos gestorVuelos = new GestorVuelos();
+        gestorVuelos.addVuelo(new Vuelo("A123", "Madrid", "París", LocalDate.of(2023, 10, 12), "10:00", 180, 50));
+        gestorVuelos.addVuelo(new Vuelo("B456", "Madrid", "Londres", LocalDate.of(2023, 10, 12), "12:00", 200, 80));
+        gestorVuelos.addVuelo(new Vuelo("C789", "Barcelona", "Roma", LocalDate.of(2023, 10, 12), "14:00", 150, 75));
+        gestorVuelos.addVuelo(new Vuelo("D321", "Madrid", "Berlín", LocalDate.of(2023, 10, 12), "16:00", 160, 60));
+        gestorVuelos.addVuelo(new Vuelo("E654", "Madrid", "Berlín", LocalDate.of(2023, 10, 23), "16:00", 160, 60));
+
+        LocalDate fechaInicioSemana = LocalDate.of(2023, 10, 12);
+        Vuelo[] vuelosSemana = gestorVuelos.consultarVolsPerSetmana(fechaInicioSemana);
         //assert
         assertEquals(4, vuelosSemana.length, "El número de vuelos debería ser 4");
 
         assertEquals("A123", vuelosSemana[0].getFlightIdentifier());
         assertEquals("B456", vuelosSemana[1].getFlightIdentifier());
         assertEquals("C789", vuelosSemana[2].getFlightIdentifier());
-        assertEquals("E654", vuelosSemana[3].getFlightIdentifier());
+        assertEquals("D321", vuelosSemana[3].getFlightIdentifier());
 
-        assertNotEquals("D321", vuelosSemana[3].getFlightIdentifier(), "El vuelo D321 no debería estar en esa semana");
+        assertNotEquals("E654", vuelosSemana[3].getFlightIdentifier(), "El vuelo D321 no debería estar en esa semana");
     }
 
     @Test
     public void testConsultarVuelosPorDia() {
         //arrange
+        GestorVuelos gestorVuelos = new GestorVuelos();
         Vuelo[] vuelos = new Vuelo[5];
         vuelos[0] = new Vuelo("A123", "Madrid", "París", LocalDate.of(2025, 4, 12), "10:00", 180, 50);
         vuelos[1] = new Vuelo("B456", "Madrid", "Londres", LocalDate.of(2025, 4, 14), "12:00", 200, 80);
@@ -77,9 +78,12 @@ class GestorVuelosTest {
         vuelos[3] = new Vuelo("D321", "Madrid", "Berlín", LocalDate.of(2025, 4, 21), "16:00", 160, 60);
         vuelos[4] = new Vuelo("E654", "Valencia", "Lisboa", LocalDate.of(2025, 4, 12), "09:00", 140, 90);
         //add
+        for (Vuelo vuelo : vuelos) {
+            gestorVuelos.addVuelo(vuelo);
+        }
         LocalDate fechaConsulta = LocalDate.of(2025, 4, 12);
 
-        Vuelo[] vuelosDia = GestorVuelos.consultarVolsPerDia(vuelos, fechaConsulta);
+        Vuelo[] vuelosDia = gestorVuelos.consultarVolsPerDia(fechaConsulta);
         //assert
         assertEquals(3, vuelosDia.length, "El número de vuelos debería ser 3 para esa fecha");
 
